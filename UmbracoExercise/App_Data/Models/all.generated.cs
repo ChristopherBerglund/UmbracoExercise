@@ -6,7 +6,7 @@ using  Umbraco.Core.Models;
 using  Umbraco.Core.Models.PublishedContent;
 using  Umbraco.Web;
 using  Umbraco.ModelsBuilder.Embedded;
-[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "f1b10813b095d21b")]
+[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "b223e80ef5dd2fbe")]
 [assembly:System.Reflection.AssemblyVersion("0.0.0.1")]
 
 
@@ -90,11 +90,18 @@ namespace Umbraco.Web.PublishedModels
 		public string JumboHeader => global::Umbraco.Web.PublishedModels.Jumbo.GetJumboHeader(this);
 
 		///<summary>
-		/// Jumbo Img: This is the Jumbo Image
+		/// Jumbo Image: This is the image inside the Jumbotron
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
-		[ImplementPropertyType("jumboImg")]
-		public global::Umbraco.Core.Models.PublishedContent.IPublishedContent JumboImg => global::Umbraco.Web.PublishedModels.Jumbo.GetJumboImg(this);
+		[ImplementPropertyType("jumboImage")]
+		public global::Umbraco.Core.Models.PublishedContent.IPublishedContent JumboImage => global::Umbraco.Web.PublishedModels.Jumbo.GetJumboImage(this);
+
+		///<summary>
+		/// Jumbo Overlay Colour: This is the color on Jumbo image
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
+		[ImplementPropertyType("jumboOverlayColour")]
+		public string JumboOverlayColour => global::Umbraco.Web.PublishedModels.Jumbo.GetJumboOverlayColour(this);
 
 		///<summary>
 		/// Jumbo Sub: This is the Lead on the Jumbo
@@ -102,39 +109,6 @@ namespace Umbraco.Web.PublishedModels
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
 		[ImplementPropertyType("jumboSub")]
 		public string JumboSub => global::Umbraco.Web.PublishedModels.Jumbo.GetJumboSub(this);
-
-		///<summary>
-		/// page content text: this will be the text message displayed on the screen
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
-		[ImplementPropertyType("pageContentText")]
-		public string PageContentText => global::Umbraco.Web.PublishedModels.PageContent.GetPageContentText(this);
-	}
-
-	/// <summary>About</summary>
-	[PublishedModel("about")]
-	public partial class About : PublishedContentModel, IPageContent
-	{
-		// helpers
-#pragma warning disable 0109 // new is redundant
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
-		public new const string ModelTypeAlias = "about";
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
-		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
-		public new static IPublishedContentType GetModelContentType()
-			=> PublishedModelUtility.GetModelContentType(ModelItemType, ModelTypeAlias);
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
-		public static IPublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<About, TValue>> selector)
-			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(), selector);
-#pragma warning restore 0109
-
-		// ctor
-		public About(IPublishedContent content)
-			: base(content)
-		{ }
-
-		// properties
 
 		///<summary>
 		/// page content text: this will be the text message displayed on the screen
@@ -228,6 +202,34 @@ namespace Umbraco.Web.PublishedModels
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
 		[ImplementPropertyType("testMode")]
 		public bool TestMode => this.Value<bool>("testMode");
+
+		///<summary>
+		/// Twitter Access Token: This is the access token for twitter API
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
+		[ImplementPropertyType("twitterAccessToken")]
+		public string TwitterAccessToken => this.Value<string>("twitterAccessToken");
+
+		///<summary>
+		/// Twitter Access Token Secret: This is the private key for the access
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
+		[ImplementPropertyType("twitterAccessTokenSecret")]
+		public string TwitterAccessTokenSecret => this.Value<string>("twitterAccessTokenSecret");
+
+		///<summary>
+		/// Twitter Consume APO: The consumer API key
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
+		[ImplementPropertyType("twitterConsumeAPO")]
+		public string TwitterConsumeApo => this.Value<string>("twitterConsumeAPO");
+
+		///<summary>
+		/// Twitter Consumer Secret API Key: The scret consumer key
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
+		[ImplementPropertyType("twitterConsumerSecretAPIKey")]
+		public string TwitterConsumerSecretApikey => this.Value<string>("twitterConsumerSecretAPIKey");
 	}
 
 	// Mixin Content Type with alias "callToAction"
@@ -314,9 +316,13 @@ namespace Umbraco.Web.PublishedModels
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
 		string JumboHeader { get; }
 
-		/// <summary>Jumbo Img</summary>
+		/// <summary>Jumbo Image</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
-		global::Umbraco.Core.Models.PublishedContent.IPublishedContent JumboImg { get; }
+		global::Umbraco.Core.Models.PublishedContent.IPublishedContent JumboImage { get; }
+
+		/// <summary>Jumbo Overlay Colour</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
+		string JumboOverlayColour { get; }
 
 		/// <summary>Jumbo Sub</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
@@ -360,15 +366,26 @@ namespace Umbraco.Web.PublishedModels
 		public static string GetJumboHeader(IJumbo that) => that.Value<string>("jumboHeader");
 
 		///<summary>
-		/// Jumbo Img: This is the Jumbo Image
+		/// Jumbo Image: This is the image inside the Jumbotron
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
-		[ImplementPropertyType("jumboImg")]
-		public global::Umbraco.Core.Models.PublishedContent.IPublishedContent JumboImg => GetJumboImg(this);
+		[ImplementPropertyType("jumboImage")]
+		public global::Umbraco.Core.Models.PublishedContent.IPublishedContent JumboImage => GetJumboImage(this);
 
-		/// <summary>Static getter for Jumbo Img</summary>
+		/// <summary>Static getter for Jumbo Image</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
-		public static global::Umbraco.Core.Models.PublishedContent.IPublishedContent GetJumboImg(IJumbo that) => that.Value<global::Umbraco.Core.Models.PublishedContent.IPublishedContent>("jumboImg");
+		public static global::Umbraco.Core.Models.PublishedContent.IPublishedContent GetJumboImage(IJumbo that) => that.Value<global::Umbraco.Core.Models.PublishedContent.IPublishedContent>("jumboImage");
+
+		///<summary>
+		/// Jumbo Overlay Colour: This is the color on Jumbo image
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
+		[ImplementPropertyType("jumboOverlayColour")]
+		public string JumboOverlayColour => GetJumboOverlayColour(this);
+
+		/// <summary>Static getter for Jumbo Overlay Colour</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
+		public static string GetJumboOverlayColour(IJumbo that) => that.Value<string>("jumboOverlayColour");
 
 		///<summary>
 		/// Jumbo Sub: This is the Lead on the Jumbo
@@ -422,6 +439,13 @@ namespace Umbraco.Web.PublishedModels
 		public global::Umbraco.Core.PropertyEditors.ValueConverters.ImageCropperValue ArticleImage => this.Value<global::Umbraco.Core.PropertyEditors.ValueConverters.ImageCropperValue>("articleImage");
 
 		///<summary>
+		/// Article Related Content: a picker to associate
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
+		[ImplementPropertyType("articleRelatedContent")]
+		public global::System.Collections.Generic.IEnumerable<global::Umbraco.Core.Models.PublishedContent.IPublishedContent> ArticleRelatedContent => this.Value<global::System.Collections.Generic.IEnumerable<global::Umbraco.Core.Models.PublishedContent.IPublishedContent>>("articleRelatedContent");
+
+		///<summary>
 		/// Author: This is the Athour
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
@@ -452,7 +476,7 @@ namespace Umbraco.Web.PublishedModels
 
 	/// <summary>News Articles</summary>
 	[PublishedModel("newsArticles")]
-	public partial class NewsArticles : PublishedContentModel
+	public partial class NewsArticles : PublishedContentModel, IJumbo
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
@@ -474,6 +498,155 @@ namespace Umbraco.Web.PublishedModels
 		{ }
 
 		// properties
+
+		///<summary>
+		/// Jumbo Header: This is the Header on jumbotron
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
+		[ImplementPropertyType("jumboHeader")]
+		public string JumboHeader => global::Umbraco.Web.PublishedModels.Jumbo.GetJumboHeader(this);
+
+		///<summary>
+		/// Jumbo Image: This is the image inside the Jumbotron
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
+		[ImplementPropertyType("jumboImage")]
+		public global::Umbraco.Core.Models.PublishedContent.IPublishedContent JumboImage => global::Umbraco.Web.PublishedModels.Jumbo.GetJumboImage(this);
+
+		///<summary>
+		/// Jumbo Overlay Colour: This is the color on Jumbo image
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
+		[ImplementPropertyType("jumboOverlayColour")]
+		public string JumboOverlayColour => global::Umbraco.Web.PublishedModels.Jumbo.GetJumboOverlayColour(this);
+
+		///<summary>
+		/// Jumbo Sub: This is the Lead on the Jumbo
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
+		[ImplementPropertyType("jumboSub")]
+		public string JumboSub => global::Umbraco.Web.PublishedModels.Jumbo.GetJumboSub(this);
+	}
+
+	/// <summary>Content page</summary>
+	[PublishedModel("contemtPage")]
+	public partial class ContemtPage : PublishedContentModel, IJumbo, INavigation
+	{
+		// helpers
+#pragma warning disable 0109 // new is redundant
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
+		public new const string ModelTypeAlias = "contemtPage";
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
+		public new static IPublishedContentType GetModelContentType()
+			=> PublishedModelUtility.GetModelContentType(ModelItemType, ModelTypeAlias);
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<ContemtPage, TValue>> selector)
+			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+#pragma warning restore 0109
+
+		// ctor
+		public ContemtPage(IPublishedContent content)
+			: base(content)
+		{ }
+
+		// properties
+
+		///<summary>
+		/// Content Grid: This is the umbraco grid for content layout
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
+		[ImplementPropertyType("contentGrid")]
+		public global::Newtonsoft.Json.Linq.JToken ContentGrid => this.Value<global::Newtonsoft.Json.Linq.JToken>("contentGrid");
+
+		///<summary>
+		/// PageContemt: This is the page contemt
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
+		[ImplementPropertyType("pageContemt")]
+		public global::System.Web.IHtmlString PageContemt => this.Value<global::System.Web.IHtmlString>("pageContemt");
+
+		///<summary>
+		/// Jumbo Header: This is the Header on jumbotron
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
+		[ImplementPropertyType("jumboHeader")]
+		public string JumboHeader => global::Umbraco.Web.PublishedModels.Jumbo.GetJumboHeader(this);
+
+		///<summary>
+		/// Jumbo Image: This is the image inside the Jumbotron
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
+		[ImplementPropertyType("jumboImage")]
+		public global::Umbraco.Core.Models.PublishedContent.IPublishedContent JumboImage => global::Umbraco.Web.PublishedModels.Jumbo.GetJumboImage(this);
+
+		///<summary>
+		/// Jumbo Overlay Colour: This is the color on Jumbo image
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
+		[ImplementPropertyType("jumboOverlayColour")]
+		public string JumboOverlayColour => global::Umbraco.Web.PublishedModels.Jumbo.GetJumboOverlayColour(this);
+
+		///<summary>
+		/// Jumbo Sub: This is the Lead on the Jumbo
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
+		[ImplementPropertyType("jumboSub")]
+		public string JumboSub => global::Umbraco.Web.PublishedModels.Jumbo.GetJumboSub(this);
+
+		///<summary>
+		/// Umbraco Navi Hide: If this is checked the the page wont appear in the nav-bar
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
+		[ImplementPropertyType("umbracoNaviHide")]
+		public bool UmbracoNaviHide => global::Umbraco.Web.PublishedModels.Navigation.GetUmbracoNaviHide(this);
+	}
+
+	// Mixin Content Type with alias "navigation"
+	/// <summary>Navigation</summary>
+	public partial interface INavigation : IPublishedContent
+	{
+		/// <summary>Umbraco Navi Hide</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
+		bool UmbracoNaviHide { get; }
+	}
+
+	/// <summary>Navigation</summary>
+	[PublishedModel("navigation")]
+	public partial class Navigation : PublishedContentModel, INavigation
+	{
+		// helpers
+#pragma warning disable 0109 // new is redundant
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
+		public new const string ModelTypeAlias = "navigation";
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
+		public new static IPublishedContentType GetModelContentType()
+			=> PublishedModelUtility.GetModelContentType(ModelItemType, ModelTypeAlias);
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<Navigation, TValue>> selector)
+			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+#pragma warning restore 0109
+
+		// ctor
+		public Navigation(IPublishedContent content)
+			: base(content)
+		{ }
+
+		// properties
+
+		///<summary>
+		/// Umbraco Navi Hide: If this is checked the the page wont appear in the nav-bar
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
+		[ImplementPropertyType("umbracoNaviHide")]
+		public bool UmbracoNaviHide => GetUmbracoNaviHide(this);
+
+		/// <summary>Static getter for Umbraco Navi Hide</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
+		public static bool GetUmbracoNaviHide(INavigation that) => that.Value<bool>("umbracoNaviHide");
 	}
 
 	/// <summary>Folder</summary>

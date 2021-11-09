@@ -1,5 +1,128 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.NewsArticles>
 @using ContentModels = Umbraco.Web.PublishedModels;
+@using Umbraco.Core.PropertyEditors.ValueConverters;
 @{
-	Layout = null;
+	Layout = "main.cshtml";
+	var articles = Umbraco.ContentAtRoot().DescendantsOrSelfOfType("newsArticles").FirstOrDefault();
+	var news = articles.Children;
+
+	if(!string.IsNullOrEmpty(Request.QueryString["cat"]))
+	{
+	    news = articles.Children.Where(w => w.Value<string[]>("newsCategories").Contains(Request.QueryString["cat"]));
+	}
+
+	
+	var jumboOverlayColour = Model.Value<string>("jumboOverlayColour");
+	var tags = articles.Children.Select(w => w.Value<string[]>("newsCategories"));
+	var categoryList = new List<string>();
+	foreach(var tagArray in tags)
+	{
+	    foreach(var tag in tagArray)
+	    {
+	        if(!categoryList.Contains(tag))
+	        {
+	            categoryList.Add(tag);
+	        }
+	    }
+	}
 }
+
+
+@section head
+{
+<style>
+    .card-horizontal {
+        display: flex;
+        flex: 1 1 auto;
+    }
+    .active a {
+        color: white;
+       
+    }
+    
+</style>
+}
+
+@if(!string.IsNullOrEmpty(jumboOverlayColour)){
+    <style>
+    .Back > .overlay{
+        background-color: #@jumboOverlayColour;
+        opacity: 0.5;
+    }
+    </style>
+}
+
+
+@Html.Partial("Jumbo")
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 bg-light p-0">
+            <!-- reneder news as card -->
+            <div class="container">
+                <div class="row">
+                    <div class="col p-0">
+                        
+                        <!-- render card -->
+                        @foreach (var article in news.OrderByDescending(o => o.Value<DateTime>("postDate")))
+                        {
+                            var imgCropper = article.Value<ImageCropperValue>("articleImage");
+                            var imgUrl = imgCropper.Src + imgCropper.GetCropUrl("thumb");
+                            
+                            <!-- render the news card -->
+                            <div class="card mt-25 mb-25">
+                                <a class="card-block streched-link text-decoration-none" href="@article.Url">
+                                    <div class="card-horizontal">
+                                        <div class="img-square-wrapper">
+                                            <img src="@imgUrl"/>
+                                        </div>
+                                        <div class="card-body">
+                                            <h4 class="card-title pb-25">@article.Name</h4>
+                                            <p class="card-text">@article.Value("leadIn")</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="col-md-4 bg-dark text-white text-center">
+            <!-- render the filters -->
+            <h3>Categories</h3>
+            <ul>
+                @foreach(var category in categoryList.OrderBy(o=>o))
+                {
+                    var activeClass="";
+                    if(category == Request.QueryString["cat"])
+                    {
+                        activeClass = "active";
+                    }
+                    <li class="@activeClass"><a href="@Model.Url?cat=@category">@category</a></li>
+                }
+                <a href="@Model.Url" class="btn btn-primary">Clear</a>
+            </ul>
+        </div>    
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

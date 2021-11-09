@@ -1,0 +1,18 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.ContemtPage>
+@using ContentModels = Umbraco.Web.PublishedModels;
+@{
+	Layout = "main.cshtml";
+	
+	var jumboOverlayColour = Model.Value<string>("jumboOverlayColour");
+}
+
+@if(!string.IsNullOrEmpty(jumboOverlayColour)){
+    <style>
+    .Back > .overlay{
+        background-color: #@jumboOverlayColour;
+        opacity: 0.5;
+    }
+    </style>
+}
+@Html.Partial("Jumbo")
+@Html.GetGridHtml(Model, "contentGrid")

@@ -22,8 +22,10 @@
             crossorigin = "anonymous",
             referrerpolicy = "no-referrer"
         });
-            Html.RequiresCss("/Stylesheets/CookieConsent.css");
-        
+        Html.RequiresCss("/css/CookieConsent.css");
+        Html.RequiresCss("/css/Site.css");
+        Html.RequiresCss("/css/RTE.css");
+            
         
         
         
@@ -53,7 +55,7 @@
     
     @Html.RenderCssHere()
 
-
+    @RenderSection("Head", false)
 
 </head>
 <body>

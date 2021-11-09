@@ -2,22 +2,20 @@
 @using ContentModels = Umbraco.Web.PublishedModels;
 @using Umbraco.Core.PropertyEditors.ValueConverters;
 @{
-	Layout = "main.cshtml";
+    Layout = "main.cshtml";
 }
 
 @Html.Partial("Jumbo")
 
 @Html.Partial("Call to Action")
 
+@Html.Partial("Lastest news")
+
 
 <div class="container">
     <div class="row">
         <div class="col">
-            <!-- lastest nes card -->
-            @Html.Partial("Lastest news")
+            @Umbraco.RenderMacro("GetLatestTweets", new {twitterHandler="HDeveloped"})
         </div>
     </div>
 </div>
-
-
-
